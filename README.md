@@ -36,5 +36,5 @@
 クライアント側で実行
 
 ```
-mvn clean tomcat7:deploy -Dmaven.tomcat.url=http://localhost:8080/manager/text -Dmaven.tomcat.update=true
+./mvnw clean org.apache.tomcat.maven:tomcat7-maven-plugin:deploy -Dmaven.tomcat.url=http://localhost:8080/manager/text -Dmaven.tomcat.update=true
 ```
