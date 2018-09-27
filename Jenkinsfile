@@ -2,7 +2,6 @@ pipeline {
   agent any
 
   parameters {
-    string(name: 'TOMCAT_URL', defaultValue: env.TOMCAT_URL, description: 'デプロイ先Tomcat ManagerのURL\n例. http://localhost:8080/manager/text')
     string(
       name: 'TOMCAT_URLS',
       defaultValue: env.TOMCAT_URLS,
