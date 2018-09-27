@@ -10,10 +10,12 @@ pipeline {
     stage('Build') {
       steps {
         sh './mvnw clean package'
-        sh '''./mvnw org.apache.tomcat.maven:tomcat7-maven-plugin:deploy \
-            -Dmaven.tomcat.url=${params.TOMCAT_URL} \
-            -Dmaven.tomcat.server=${params.TOMCAT_SERVER} \
-            -Dmaven.tomcat.update=true'''
+        sh """
+          ./mvnw org.apache.tomcat.maven:tomcat7-maven-plugin:deploy \
+          -Dmaven.tomcat.url=${params.TOMCAT_URL} \
+          -Dmaven.tomcat.server=${params.TOMCAT_SERVER} \
+          -Dmaven.tomcat.update=true
+        """
       }
     }
     stage('Archive') {
