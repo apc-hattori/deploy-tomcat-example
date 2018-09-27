@@ -14,6 +14,10 @@ pipeline {
     stage('Build') {
       steps {
         sh './mvnw clean package'
+      }
+    }
+    stage('Deploy') {
+      steps {
         script {
           def urls = params.TOMCAT_URLS.split(',')
           def configs = [:]
