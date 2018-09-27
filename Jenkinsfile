@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh './mvnw clean package'
         sh '''
-          org.apache.tomcat.maven:tomcat7-maven-plugin:deploy \
+          ./mvnw org.apache.tomcat.maven:tomcat7-maven-plugin:deploy \
             -Dmaven.tomcat.url=${params.TOMCAT_URL} \
             -Dmaven.tomcat.server=${params.TOMCAT_SERVER} \
             -Dmaven.tomcat.update=true
