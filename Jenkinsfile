@@ -16,15 +16,19 @@ pipeline {
         sh './mvnw clean package'
         script {
           def urls = params.TOMCAT_URLS.split(',')
-          for (url in urls) {
+          def configs = [:]
+          urls.eachWithIndex { url, index ->
             def u = url
-            sh """
-              ./mvnw org.apache.tomcat.maven:tomcat7-maven-plugin:deploy-only \
-              -Dmaven.tomcat.url=${u} \
-              -Dmaven.tomcat.server=${params.TOMCAT_SERVER} \
-              -Dmaven.tomcat.update=true
-            """
+            configs["server-${index}"] = {
+              sh """
+                ./mvnw org.apache.tomcat.maven:tomcat7-maven-plugin:deploy-only \
+                -Dmaven.tomcat.url=${u} \
+                -Dmaven.tomcat.server=${params.TOMCAT_SERVER} \
+                -Dmaven.tomcat.update=true
+              """
+            }
           }
+          parallel(configs)
         }
       }
     }
